@@ -378,7 +378,7 @@ func includes(addresses []common.Address, a common.Address) bool {
 func filterLogs(logs []*types.Log, fromBlock, toBlock *big.Int, addresses []common.Address, topics [][]common.Hash) []*types.Log {
 	var ret []*types.Log
 Logs:
-	for _, log := range logs {
+	for i, log := range logs {
 		if fromBlock != nil && fromBlock.Int64() >= 0 && fromBlock.Uint64() > log.BlockNumber {
 			continue
 		}
@@ -405,6 +405,7 @@ Logs:
 				continue Logs
 			}
 		}
+		log.Index = uint(i)
 		ret = append(ret, log)
 	}
 	return ret
