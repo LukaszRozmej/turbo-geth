@@ -29,6 +29,8 @@ integration stage_history --reset
 # reset all data after stage_senders
 integration reset_state
 
+# hack which allows to force clear unwind stack of all stages
+clear_unwind_stack
 ```
 
 The way I run it: 
