@@ -1144,12 +1144,12 @@ func (c *LmdbCursor) Append(k []byte, v []byte) error {
 
 	if b.Flags&lmdb.DupSort != 0 {
 		if err := c.appendDup(k, v); err != nil {
-			return fmt.Errorf("in Append: %w, k=%x, v=%x", err, k, v)
+			return fmt.Errorf("in Append: %w, b=%s, k=%x, v=%x", err, c.bucketName, k, v)
 		}
 	}
 
 	if err := c.append(k, v); err != nil {
-		return fmt.Errorf("in Append: %w, k=%x, v=%x", err, k, v)
+		return fmt.Errorf("in Append: %w, b=%s, k=%x, v=%x", err, c.bucketName, k, v)
 	}
 	return nil
 }
@@ -1346,7 +1346,7 @@ func (c *LmdbCursor) AppendDup(k []byte, v []byte) error {
 	}
 
 	if err := c.appendDup(k, v); err != nil {
-		return fmt.Errorf("in AppendDup: %w, k=%x, v=%x", err, k, v)
+		return fmt.Errorf("in AppendDup: %w, b=%s, k=%x, v=%x", err, c.bucketName, k, v)
 	}
 	return nil
 }
