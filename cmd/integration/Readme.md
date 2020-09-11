@@ -31,7 +31,11 @@ integration reset_state
 
 ```
 
-The way I run it:
+The way I run it: 
 ```
-go run -trimpath ./cmd/integration --chaindata=/path/to/chaindata --unwind=10 --unwind_every=20 --pprof 
+go run -trimpath ./cmd/integration state_stages --chaindata=/path/to/chaindata --unwind=10 --unwind_every=20 --pprof 
 ```
+
+Pre-requirements of `state_stages`:
+- Headers/Bodies must be downloaded 
+- TxSenders stage must be executed
