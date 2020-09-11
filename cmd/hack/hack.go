@@ -1651,6 +1651,7 @@ func logIndex(chaindata string) error {
 	i := 0
 
 	uniqueTopics := map[common.Hash]uint{}
+	dataLen := map[int]uint{}
 	murmur := murmur3.New32()
 
 	if err := tx.Walk(dbutils.BlockReceiptsPrefix, nil, 0, func(k, v []byte) (bool, error) {
@@ -1701,6 +1702,7 @@ func logIndex(chaindata string) error {
 					newV = append(newV, txIndex...)
 					newV = append(newV, logIndex...)
 					//newV = append(newV, log.Data...)
+					dataLen[len(log.Data)]++
 					//if len(log.Data) > 0 {
 					//	fmt.Printf("Empty data!!\n")
 					//}
@@ -1733,6 +1735,7 @@ func logIndex(chaindata string) error {
 	//	}
 	//	fmt.Printf("unique:  %d, %x\n", i, t)
 	//}
+	fmt.Printf("unique:  %v\n", dataLen)
 
 	if err := collector.Load(tx, dbutils.Receipts, etl.IdentityLoadFunc, etl.TransformArgs{
 		Comparator: comparator,
